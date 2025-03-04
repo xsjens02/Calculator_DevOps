@@ -71,8 +71,11 @@ public class SimpleCalculatorTest
         var calc = new SimpleCalculator();
         var n = -1;
         
+        // Act
+        var result = Assert.Throws<ArgumentException>(() => calc.Factorial(n));
+        
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => calc.Factorial(n));
+        Assert.That(result.Message, Is.EqualTo("Factorial is not defined for negative numbers"));
     }
     
     [Test]
@@ -109,6 +112,34 @@ public class SimpleCalculatorTest
         // Arrange
         var calc = new SimpleCalculator();
         var cand = 1;
+        
+        // Act
+        var result = calc.IsPrime(cand);
+        
+        // Assert
+        Assert.That(result, Is.False);
+    }
+    
+    [Test]
+    public void IsPrime_2()
+    {
+        // Arrange
+        var calc = new SimpleCalculator();
+        var cand = 2;
+        
+        // Act
+        var result = calc.IsPrime(cand);
+        
+        // Assert
+        Assert.That(result, Is.True);
+    }
+    
+    [Test]
+    public void IsPrime_9()
+    {
+        // Arrange
+        var calc = new SimpleCalculator();
+        var cand = 9;
         
         // Act
         var result = calc.IsPrime(cand);
