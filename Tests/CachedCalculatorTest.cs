@@ -19,6 +19,7 @@ public class CachedCalculatorTest
         Assert.That(result, Is.EqualTo(5));
     }
     
+    [Test]
     public void Subtract()
     {
         // Arrange
@@ -33,6 +34,7 @@ public class CachedCalculatorTest
         Assert.That(result, Is.EqualTo(1));
     }
     
+    [Test]
     public void Multiply()
     {
         // Arrange
@@ -47,6 +49,7 @@ public class CachedCalculatorTest
         Assert.That(result, Is.EqualTo(20));
     }
     
+    [Test]
     public void Divide()
     {
         // Arrange
