@@ -15,17 +15,36 @@ jobs:
 
       - name: Install required tools
         run: |
+          dotnet tool install -g dotnet-sonarscanner
           dotnet tool install -g dotnet-reportgenerator-globaltool
           dotnet tool install -g dotnet-stryker
+          
+      - name: Start Static Code Analysis
+        run: | # INSERT RELEVANT VARIABLES BELOW
+          dotnet sonarscanner begin \
+            /k:"SJ-Demo-Project-KEY" \ 
+            /d:sonar.host.url="http://62.164.217.208:9000/" \
+            /d:sonar.token="sqp_5e38f7b0316fd118e35dc78a674ae020036ef3aa" \
+            /d:sonar.coverageReportPaths="coverage-report/SonarQube.xml" \
+            /d:sonar.qualitygate.wait=true \
+            /d:sonar.qualitygate.timeout=300
 
+      # Command to execute unit tests while collecting code coverage
       - name: Run unit tests
         run: dotnet test --collect:"XPlat Code Coverage" --results-directory TestResults
-        # Write a command to execute unit tests while collecting code coverage
         
+      # Use the ReportGenerator tool to generate a report from the code coverage results  
       - name: Generate report
         if: always()
-        run: reportgenerator -reports:"TestResults/**/coverage.cobertura.xml" -targetdir:coverage-report -reporttypes:Html 
-        # Use the ReportGenerator tool to generate a report from the code coverage results
+        run: reportgenerator \
+             -reports:"TestResults/**/coverage.cobertura.xml" \
+             -targetdir:coverage-report \
+             -reporttypes:Html, SonarQube 
+        
+      - name: Complete Static Code Analysis
+        run: | # INSERT RELEVANT VARIABLES BELOW
+          dotnet sonarscanner end \
+              /d:sonar.token="sqp_5e38f7b0316fd118e35dc78a674ae020036ef3aa"
 
       - name: Run Mutation Tests
         if: always()
