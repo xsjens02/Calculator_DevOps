@@ -22,7 +22,7 @@ jobs:
       - name: Start Static Code Analysis
         run: | # INSERT RELEVANT VARIABLES BELOW
           dotnet sonarscanner begin \
-            /k:"SJ-Demo-Project-KEY" \ 
+            /k:"SJ-Demo-Project-KEY" \
             /d:sonar.host.url="http://62.164.217.208:9000/" \
             /d:sonar.token="sqp_5e38f7b0316fd118e35dc78a674ae020036ef3aa" \
             /d:sonar.coverageReportPaths="coverage-report/SonarQube.xml" \
@@ -44,7 +44,7 @@ jobs:
       - name: Complete Static Code Analysis
         run: | # INSERT RELEVANT VARIABLES BELOW
           dotnet sonarscanner end \
-              /d:sonar.token="sqp_5e38f7b0316fd118e35dc78a674ae020036ef3aa"
+            /d:sonar.token="sqp_5e38f7b0316fd118e35dc78a674ae020036ef3aa"
 
       - name: Run Mutation Tests
         if: always()
