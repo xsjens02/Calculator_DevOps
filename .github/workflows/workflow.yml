@@ -39,7 +39,7 @@ jobs:
         run: reportgenerator \
              -reports:"TestResults/**/coverage.cobertura.xml" \
              -targetdir:coverage-report \
-             -reporttypes:Html, SonarQube 
+             -reporttypes:SonarQube 
         
       - name: Complete Static Code Analysis
         run: | # INSERT RELEVANT VARIABLES BELOW
